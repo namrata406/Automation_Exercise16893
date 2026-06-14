@@ -145,6 +145,6 @@ After test execution:
 ---
 
 ## Author
-
+Namrata Singh
 **QA Automation Engineer**  
 2+ years of experience in Selenium, Java, TestNG, and Maven-based test frameworks.
