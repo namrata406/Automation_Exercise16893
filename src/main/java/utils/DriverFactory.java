@@ -40,7 +40,8 @@ public class DriverFactory {
 		String resolvedBrowser = System.getProperty("browser", browser).toLowerCase();
 		log.info("Initialising browser: {}", resolvedBrowser);
 
-		boolean headless = Boolean.parseBoolean(configReader.get("headless"));
+		boolean headless = Boolean.parseBoolean(configReader.get("headless"))
+		        || System.getenv("GITHUB_ACTIONS") != null;		
 		WebDriver driver;
 
 		switch (resolvedBrowser) {
@@ -64,6 +65,8 @@ public class DriverFactory {
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--disable-notifications");
 			chromeOptions.addArguments("--disable-popup-blocking");
+			chromeOptions.addArguments("--window-size=1920,1080");
+			
 			if (headless) {
 				chromeOptions.addArguments("--headless=new");
 				chromeOptions.addArguments("--no-sandbox");
@@ -74,7 +77,9 @@ public class DriverFactory {
 		}
 
 		// Global timeouts
-		driver.manage().window().maximize();
+		if (!headless) {
+		    driver.manage().window().maximize();
+		}
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts()
 				.implicitlyWait(Duration.ofSeconds(Long.parseLong(configReader.get("implicit.wait"))));
