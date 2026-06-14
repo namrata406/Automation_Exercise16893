@@ -64,7 +64,6 @@ public class DriverFactory {
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--disable-notifications");
 			chromeOptions.addArguments("--disable-popup-blocking");
-			chromeOptions.addArguments("--start-maximized");
 			if (headless) {
 				chromeOptions.addArguments("--headless=new");
 				chromeOptions.addArguments("--no-sandbox");
