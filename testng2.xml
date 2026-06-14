@@ -1,0 +1,35 @@
+<!-- 
+    TestNG Suite Configuration
+    Run all tests  : mvn test
+    Run smoke only : mvn test -Dgroups=smoke
+    Change browser : mvn test -Dbrowser=firefox
+ -->
+<suite name="Suite" parallel="methods" thread-count="2" verbose="1">
+<!--  Attach custom listeners  -->
+<listeners>
+<listener class-name="listeners.TestListener"/>
+</listeners>
+<!--  ===== Smoke Suite =====  -->
+<test name="Login Tests - Smoke">
+<groups>
+<run>
+<include name="smoke"/>
+</run>
+</groups>
+<classes>
+<class name="tests.LoginTest"/>
+</classes>
+</test>
+<!--  ===== Regression Suite =====  -->
+<test name="Login Tests - Regression">
+<groups>
+<run>
+<include name="regression"/>
+</run>
+</groups>
+<classes>
+<class name="tests.LoginTest"/>
+<class name="tests.InvalidLoginTest"/>
+</classes>
+</test>
+</suite>

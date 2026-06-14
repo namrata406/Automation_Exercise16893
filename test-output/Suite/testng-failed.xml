@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="methods" name="Failed suite [Suite]">
+  <listeners>
+    <listener class-name="listeners.TestListener"/>
+  </listeners>
+  <test thread-count="2" parallel="methods" name="Login Tests - Smoke(failed)">
+    <groups>
+      <run>
+        <include name="smoke"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="tests.LoginTest">
+        <methods>
+          <include name="TC_LGN_003_loginWithValidCredentials"/>
+          <include name="setUp"/>
+          <include name="TC_LGN_005_logoutRedirectsToLoginPage"/>
+          <include name="tearDown"/>
+          <include name="TC_LGN_002_verifyPageHeadingsDisplayed"/>
+        </methods>
+      </class> <!-- tests.LoginTest -->
+    </classes>
+  </test> <!-- Login Tests - Smoke(failed) -->
+  <test thread-count="2" parallel="methods" name="Login Tests - Regression(failed)">
+    <groups>
+      <run>
+        <include name="regression"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="tests.LoginTest">
+        <methods>
+          <include name="TC_LGN_004_verifyLoggedInUsername"/>
+          <include name="TC_LGN_003_loginWithValidCredentials"/>
+          <include name="setUp"/>
+          <include name="TC_LGN_005_logoutRedirectsToLoginPage"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- tests.LoginTest -->
+      <class name="tests.InvalidLoginTest">
+        <methods>
+          <include name="tearDown"/>
+          <include name="setUp"/>
+          <include name="TC_INV_002_loginWithValidEmailWrongPassword"/>
+          <include name="TC_INV_005_dataDrivenInvalidLogins" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- tests.InvalidLoginTest -->
+    </classes>
+  </test> <!-- Login Tests - Regression(failed) -->
+</suite> <!-- Failed suite [Suite] -->
